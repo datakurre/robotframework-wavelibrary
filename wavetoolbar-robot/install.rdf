@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+    <Description about="urn:mozilla:install-manifest">
+
+        <!-- Required Items -->
+        <em:id>wavetoolbar-robot@plone.org</em:id>
+        <em:name>WAVE Toolbar - Robot Support</em:name>
+        <em:version>1.1.8</em:version>
+
+        <em:targetApplication>
+        <Description>
+            <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+            <em:minVersion>3.6</em:minVersion>
+            <em:maxVersion>*</em:maxVersion>
+        </Description>
+        </em:targetApplication>
+
+        <!-- Optional Items -->
+        <em:creator>Asko Soukka</em:creator>
+        <em:description>Injects public javascript bindings for The WAVE toolbar by WebAIM for test automation purposes.</em:description>
+        <em:homepageURL>http://plone.org/</em:homepageURL>
+        <em:iconURL>chrome://wavetoolbar/skin/addons_icon.png</em:iconURL>
+
+    </Description>
+</RDF>

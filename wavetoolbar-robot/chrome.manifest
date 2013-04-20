@@ -1,0 +1,4 @@
+content wavetoolbar-robot chrome/content/
+content wavetoolbar-robot chrome/content/ contentaccessible=yes
+
+overlay chrome://browser/content/browser.xul chrome://wavetoolbar-robot/content/wavetoolbar-robot.xul

@@ -1,0 +1,20 @@
+syntax: glob
+
+bin
+develop-eggs
+buildout-cache
+parts
+dist
+var
+etc
+
+*.pyc
+*.mo
+*.egg-info
+
+.installed.cfg
+.mr.developer.cfg
+.ropeproject
+.DS_Store
+
+wavetoolbar
