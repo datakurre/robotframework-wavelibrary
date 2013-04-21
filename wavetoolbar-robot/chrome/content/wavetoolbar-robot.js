@@ -7,6 +7,7 @@ var myObserver = {
     if (topic == "content-document-global-created" &&
         subject instanceof Ci.nsIDOMWindow) {
       XPCNativeWrapper.unwrap(subject).wave_viewIcons=wave_viewIcons;
+      XPCNativeWrapper.unwrap(subject).wave_viewReset=wave_viewReset;
     }
   }
 };

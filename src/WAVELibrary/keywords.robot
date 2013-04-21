@@ -27,6 +27,13 @@ Validate
     Log  ${errors}
     Should be equal  ${errors}  ${EMPTY}  Wave reported errors for ${URL}
 
+Log accessibility errors
+    Show errors, features and alerts
+    Capture page screenshot
+    ${errors} =  Get errors
+    Log  ${errors}
+    Hide errors, features and alerts
+
 Get errors
     ${source} =  Get source
     ${source} =  Replace string  ${source}  \n  ${EMPTY}
@@ -38,5 +45,12 @@ Show errors, features and alerts
     Execute Javascript
     ...    return (function(){
     ...        window.wave_viewIcons();
+    ...        return true;
+    ...    })();
+
+Hide errors, features and alerts
+    Execute Javascript
+    ...    return (function(){
+    ...        window.wave_viewReset();
     ...        return true;
     ...    })();
