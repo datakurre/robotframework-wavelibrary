@@ -20,16 +20,16 @@ demo.robot::
 
     Library  WAVELibrary
 
-    Suite setup  Open WAVE-browser
+    Suite setup  Open WAVE browser
     Suite teardown  Close all browsers
 
     *** Test Cases ***
 
-    Test validation
-        Validate  http://www.plone.org/
+    Test check errors
+        Check URL for accessibility errors  http://www.plone.org/
 
     Test validation with template
-        [Template]  Validate
+        [Template]  Check URL for accessibility errors
         http://www.plone.org/
         http://www.plone.org/
 
