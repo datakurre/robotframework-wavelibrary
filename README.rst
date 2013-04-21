@@ -2,11 +2,13 @@ WAVE-library for Robot Framework
 ================================
 
 WAVE is an accessibility analyzing service and Firefox add-on created by
-WebAIM. This library provides Robot Framework resources for executing
+WebAIM. This library provides a few Robot Framework resources for executing
 automated analyzes with the Firefox add-on.
 
-(This package includes a Firefox profile with WAVE toolbar extension
-installed.)
+(This package includes a Firefox profile with The WAVE Toolbar extension
+installed. The WAVE toolbar, its interface elements, design elements,
+functionality, and underlying code are © WebAIM. Distribution of the extension
+with this library is done a permission from WebAIM.)
 
 ::
 
@@ -16,7 +18,7 @@ demo.robot::
 
     *** Settings ***
 
-    Resource  WAVE.robot
+    Library  WAVELibrary
 
     Suite setup  Open WAVE-browser
     Suite teardown  Close all browsers

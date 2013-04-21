@@ -5,7 +5,7 @@ Library  String
 
 *** Variables ***
 
-${FF_PROFILE_DIR}  ${CURDIR}/robotframework_wavelibrary_profile
+${FF_PROFILE_DIR}  ${CURDIR}/profile
 
 *** Keywords ***
 
