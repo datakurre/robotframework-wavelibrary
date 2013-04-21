@@ -8,6 +8,7 @@ Library  WAVELibrary.Cropping
 *** Variables ***
 
 ${FF_PROFILE_DIR}  ${CURDIR}/profile
+${ERROR_CROP_MARGIN}  50
 
 *** Keywords ***
 
@@ -55,16 +56,17 @@ Hide errors, features and alerts
 
 Capture errors
     @{ids} =  Tag errors
+    ${keyword} =  Register keyword to run on failure  No operation
     :FOR  ${id}  IN  @{ids}
     \  Run keyword and ignore error  Capture error  ${id}
+    Register keyword to run on failure  ${keyword}
 
 Capture error
     [Arguments]  ${id}
     Element should be visible  id=${ID}
     Mouse over  ${id}
     Element should be visible  css=.wave4tooltip
-    Capture and crop error  ${id}.png
-    ...    ${id}  css=.wave4tooltip
+    Capture and crop error  ${id}.png  ${id}
 
 Tag errors
     ${errors} =  Execute Javascript
@@ -75,6 +77,7 @@ Tag errors
     ...        );
     ...        for (i=0; i < errors.length; i++) {
     ...            id = 'wave-error-' + (new Date().getTime()).toString();
+    ...            id = id + i.toString();
     ...            errors[i].id = id;
     ...            ids.push(id);
     ...        }
@@ -83,35 +86,35 @@ Tag errors
     [Return]  ${errors}
 
 Crop error
-    [Arguments]  ${filename}  @{locators}
-    @{selectors} =  Create list
-    :FOR  ${locator}  IN  @{locators}
-    \  ${selector} =  Normalize annotation locator  ${locator}
-    \  Append to list  ${selectors}  ${selector}
-    ${selectors} =  Convert to string  ${selectors}
-    ${selectors} =  Replace string using regexp  ${selectors}  u'  '
+    [Arguments]  ${filename}  @{ids}
+    ${ids} =  Convert to string  ${ids}
+    ${ids} =  Replace string using regexp  ${ids}  u'  '
     @{dimensions} =  Execute Javascript
     ...    return (function(){
-    ...        var selectors = ${selectors}, i, target, offset;
+    ...        var ids = ${ids}, i, target, box, style, offset={};
     ...        var left = null, top = null, width = null, height = null;
-    ...        for (i = 0; i < selectors.length; i++) {
-    ...            target = jQuery(selectors[i]);
-    ...            if (target.length === 0) {
-    ...                return [selectors[i], '', '', ''];
+    ...        for (i = 0; i <= ids.length; i++) {
+    ...            if (i < ids.length) {
+    ...                target = window.document.getElementById(ids[i]);
+    ...            } else {
+    ...                target = window.document.getElementsByClassName(
+    ...                    'wave4tooltip')[0];
     ...            }
-    ...            offset = target.offset();
+    ...            box = target.getBoundingClientRect();
+    ...            offset.left = Math.round(box.left + window.pageXOffset);
+    ...            offset.top = Math.round(box.top + window.pageYOffset);
     ...            if (left === null || width === null) {
-    ...                width = target.outerWidth();
+    ...                width = box.width;
     ...            } else {
     ...                width = Math.max(
-    ...                    left + width, offset.left + target.outerWidth()
+    ...                    left + width, offset.left + box.width
     ...                ) - Math.min(left, offset.left);
     ...            }
     ...            if (top === null || height === null) {
-    ...                height = target.outerHeight();
+    ...                height = box.height;
     ...            } else {
     ...                height = Math.max(
-    ...                    top + height, offset.top + target.outerHeight()
+    ...                    top + height, offset.top + box.height
     ...                ) - Math.min(top, offset.top);
     ...            }
     ...            if (left === null) { left = offset.left; }
@@ -119,14 +122,11 @@ Crop error
     ...            if (top === null) { top = offset.top; }
     ...            else { top = Math.min(top, offset.top); }
     ...        }
-    ...        return [Math.max(0, left - ${CROP_MARGIN}),
-    ...                Math.max(0, top - ${CROP_MARGIN}),
-    ...                Math.max(0, width + ${CROP_MARGIN} * 2),
-    ...                Math.max(height + ${CROP_MARGIN} * 2)];
+    ...        return [Math.max(0, left - ${ERROR_CROP_MARGIN}),
+    ...                Math.max(0, top - ${ERROR_CROP_MARGIN}),
+    ...                Math.max(0, width + ${ERROR_CROP_MARGIN} * 2),
+    ...                Math.max(height + ${ERROR_CROP_MARGIN} * 2)];
     ...    })();
-    ${first} =  Convert to string  @{dimensions}[0]
-    Should match regexp  ${first}  ^[\\d\\.]+$
-    ...    msg=${first} was not found and no image was cropped
     Crop error image  ${OUTPUT_DIR}  ${filename}  @{dimensions}
 
 Capture and crop error
