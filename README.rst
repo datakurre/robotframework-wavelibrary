@@ -6,9 +6,8 @@ WebAIM. This library provides a few Robot Framework resources for executing
 automated analyzes with the Firefox add-on.
 
 (This package includes a Firefox profile with The WAVE Toolbar extension
-installed. The WAVE toolbar, its interface elements, design elements,
-functionality, and underlying code are © WebAIM. Distribution of the extension
-with this library is done a permission from WebAIM.)
+pre-installed. The WAVE toolbar, its interface elements, design elements,
+functionality, and underlying code are © WebAIM.)
 
 ::
 
@@ -25,13 +24,16 @@ demo.robot::
 
     *** Test Cases ***
 
-    Test check errors
-        Check URL for accessibility errors  http://www.plone.org/
+    Test single site
+        Go to  http://www.plone.org/
+        Check accessibility errors
 
     Test validation with template
         [Template]  Check URL for accessibility errors
         http://www.plone.org/
-        http://www.plone.org/
+        http://www.drupal.org/
+        http://www.joomla.org/
+        http://www.wordpress.org/
 
 ::
 
