@@ -21,7 +21,7 @@ class WAVELibrary(object):
 
 class Cropping(object):
 
-    def crop_error_image(self, output_dir, filename, left, top, width, height):
+    def crop_wave_error_image(self, output_dir, filename, left, top, width, height):
         """Crop the saved image with given filename for the given dimensions.
         """
         from PIL import Image

@@ -24,51 +24,57 @@ Check URL for accessibility errors
 
 Check accessibility errors
     [Documentation]  Check the current page for accessibility errors
-    Show errors, features and alerts
-    ${errors} =  Get errors
+    Show WAVE errors, features and alerts
+    ${errors} =  Get WAVE errors
     ${found} =  Convert to boolean  ${errors}
-    Run keyword if  ${found}  Log errors  ${errors}
+    Run keyword if  ${found}  Log WAVE errors  ${errors}
     ${url} =  Get location
     Should be equal  ${errors}  ${EMPTY}  Wave reported errors for ${url}
-    Hide errors, features and alerts
+    Hide WAVE errors, features and alerts
 
-Log errors
+Log WAVE errors
+    [Documentation]  Tag the current test with *Accessibility issues*-tag,
+    ...              try to take screenshots of each given accessibility issue
+    ...              and append the errors into the current test log.
     [Arguments]  ${errors}
     Set tags  Accessibility issues
     Capture page screenshot
-    Capture errors
+    Capture WAVE errors
     Log  ${errors}  level=ERROR
 
-Get errors
+Get WAVE errors
+    [Documentation]  Extract and return the found WAVE Toolbar errors from the
+    ...              currently open page.
     ${source} =  Get source
     ${source} =  Replace string  ${source}  \n  ${EMPTY}
     ${source} =  Replace string  ${source}  "  \n
     ${source} =  Get lines matching regexp  ${source}  ^ERROR:.*
     [return]  ${source}
 
-Show errors, features and alerts
+Show WAVE errors, features and alerts
+    [Documentation]  Activate WAVE Toolbar's *Show WAVE errors, features and alerts*
+    ...              action.
     Execute Javascript
     ...    return (function(){ window.wave_viewIcons(); return true; })();
 
-Hide errors, features and alerts
+Hide WAVE errors, features and alerts
+    [Documentation]  Disable WAVE Toolbar's *Show WAVE errors, features and alerts*
+    ...              action.
     Execute Javascript
     ...    return (function(){ window.wave_viewReset(); return true; })();
 
-Capture errors
-    @{ids} =  Tag errors
+Capture WAVE errors
+    [Documentation]  Try to take a screen capture of each currently visible
+    ...              WAVE toolbar reported error.
+    @{ids} =  Tag WAVE errors
     ${keyword} =  Register keyword to run on failure  No operation
     :FOR  ${id}  IN  @{ids}
-    \  Run keyword and ignore error  Capture error  ${id}
+    \  Run keyword and ignore error  Capture WAVE error  ${id}
     Register keyword to run on failure  ${keyword}
 
-Capture error
-    [Arguments]  ${id}
-    Element should be visible  id=${ID}
-    Mouse over  ${id}
-    Element should be visible  css=.wave4tooltip
-    Capture and crop error  ${id}.png  ${id}
-
-Tag errors
+Tag WAVE errors
+    [Documentation]  Tag each WAVE toolbar reported error with a unique id
+    ...              and return the ids to ease access to the errors.
     ${errors} =  Execute Javascript
     ...    return (function(){
     ...        var i, id, ids = [], errors = Array.filter(
@@ -85,7 +91,19 @@ Tag errors
     ...    })();
     [Return]  ${errors}
 
-Crop error
+Capture WAVE error
+    [Documentation]  Try to take a screen capture of a currently visible
+    ...              WAVE toolbar reported error tagged with the given id.
+    [Arguments]  ${id}
+    Element should be visible  id=${ID}
+    Mouse over  ${id}
+    Element should be visible  css=.wave4tooltip
+    Capture and crop WAVE error  ${id}.png  ${id}
+
+Crop WAVE error
+    [Documentation]  Crop the captured WAVE Toolbar error image saved
+    ...              with the given filename using the bouding box of the
+    ...              given element ids.
     [Arguments]  ${filename}  @{ids}
     ${ids} =  Convert to string  ${ids}
     ${ids} =  Replace string using regexp  ${ids}  u'  '
@@ -127,9 +145,11 @@ Crop error
     ...                Math.max(0, width + ${ERROR_CROP_MARGIN} * 2),
     ...                Math.max(height + ${ERROR_CROP_MARGIN} * 2)];
     ...    })();
-    Crop error image  ${OUTPUT_DIR}  ${filename}  @{dimensions}
+    Crop WAVE error image  ${OUTPUT_DIR}  ${filename}  @{dimensions}
 
-Capture and crop error
+Capture and crop WAVE error
+    [Documentation]  Capture and crop WAVE toolbar error to the given
+    ...              filename using the bounding box of the given element ids.
     [Arguments]  ${filename}  @{locators}
     Capture page screenshot  ${filename}
-    Crop error  ${filename}  @{locators}
+    Crop WAVE error  ${filename}  @{locators}
