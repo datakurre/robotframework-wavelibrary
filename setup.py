@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="robotframework-wavelibrary",
-    version='0.1.1.dev0',
+    version='0.1.1',
     description="Robot Framework resources for automating WebAIM Wave Toolbar",
     long_description=(open("README.rst").read() + "\n" +
                       open("CHANGES.txt").read()),
