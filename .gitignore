@@ -12,7 +12,12 @@ buildout-cache
 develop-eggs
 dist
 etc
+log.html
+output.xml
 parts
+report.html
+selenium-screenshot-*.png
 var
+wave-error-*.png
 wavetoolbar
 
