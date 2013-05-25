@@ -7,7 +7,7 @@ automated analyzes with the Firefox add-on.
 
 (This package includes a Firefox profile with The WAVE Toolbar extension
 pre-installed. The WAVE toolbar, its interface elements, design elements,
-functionality, and underlying code are © WebAIM.)
+functionality, and underlying code are (c) WebAIM.)
 
 ::
 
