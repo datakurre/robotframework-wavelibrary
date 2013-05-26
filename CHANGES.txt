@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.1.3 (unreleased)
+0.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix to take page screenshot only when WAVE Toolbar reports errors
 
 
 0.1.2 (2013-05-26)
