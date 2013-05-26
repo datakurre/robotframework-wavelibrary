@@ -6,7 +6,6 @@ Changelog
 
 - Fix to take page screenshot only when WAVE Toolbar reports errors
 
-
 0.1.2 (2013-05-26)
 ------------------
 
