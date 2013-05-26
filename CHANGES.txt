@@ -4,8 +4,7 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Updated documentation.
 
 0.1.1 (2013-05-25)
 ------------------
