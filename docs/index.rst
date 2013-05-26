@@ -4,27 +4,18 @@ Robot Framework WAVE-library
 Usage
 -----
 
-.. code:: robotframework
-
-    *** Settings ***
+Include keywords with::
 
     Library  WAVELibrary
 
-    Suite setup  Open WAVE browser
-    Suite teardown  Close all browsers
+.. note::
 
-    *** Test Cases ***
-
-    Test single site
-        Go to  http://www.plone.org/
-        Check accessibility errors
-
-    Test validation with template
-        [Template]  Check URL for accessibility errors
-        http://www.plone.org/
-        http://www.drupal.org/
-        http://www.joomla.org/
-        http://www.wordpress.org/
+   Currently, RIDE is unable to find keywords provided by this library when
+   this library is imported with ``Library  WAVELibrary``. This can be fixed
+   by requiring the library with ``Resource  WAVELibrary/keywords.robot``.
+   (Currently all keywords are written as user keywords, but later they may be
+   refactored into Python-keywords. If this happens, there will be backwards
+   compatible wrappers available at ``keywords.robot``.)
 
 Keywords
 --------
