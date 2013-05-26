@@ -38,3 +38,5 @@ demo.robot::
 ::
 
     $ pybot demo.robot
+
+`Read the docs for more detailed information. <https://robot-framework-wave-library.readthedocs.org/>`_
