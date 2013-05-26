@@ -25,7 +25,6 @@ Check URL for accessibility errors
 Check accessibility errors
     [Documentation]  Check the current page for accessibility errors
     Show WAVE errors, features and alerts
-    Capture page screenshot
     ${errors} =  Get WAVE errors
     ${found} =  Convert to boolean  ${errors}
     Run keyword if  ${found}  Log WAVE errors  ${errors}
