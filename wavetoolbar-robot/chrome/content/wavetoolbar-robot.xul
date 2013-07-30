@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <overlay id="wavetoolbar_overlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-<script type="application/x-javascript" src="wavetoolbar-robot.js"></script>
+    <script type="application/x-javascript" src="wavetoolbar-robot.js"></script>
 
 </overlay>
