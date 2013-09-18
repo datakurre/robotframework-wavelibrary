@@ -59,4 +59,4 @@ Running
 
     $ pybot demo.robot
 
-`Read the docs for more detailed information. <https://robot-framework-wave-library.readthedocs.org/>`_
+`Read the docs for more detailed information. <https://robotframework-wavelibrary.readthedocs.org/>`_
